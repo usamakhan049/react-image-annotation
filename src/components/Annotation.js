@@ -5,6 +5,8 @@ import compose from '../utils/compose'
 import isMouseHovering from '../utils/isMouseHovering'
 import withRelativeMousePos from '../utils/withRelativeMousePos'
 
+import { PolygonSelector } from '../selectors'
+
 import defaultProps from './defaultProps'
 import Overlay from './Overlay'
 
@@ -15,7 +17,6 @@ const Container = styled.div`
   &:hover ${Overlay} {
     opacity: 1;
   }
-  touch-action: ${(props) => (props.allowTouch ? "pinch-zoom" : "auto")};
 `
 
 const Img = styled.img`
@@ -43,7 +44,15 @@ export default compose(
     onMouseDown: T.func,
     onMouseMove: T.func,
     onClick: T.func,
-    children: T.object,
+    // This prop represents how zoom the image is (default: 1)
+    imageZoomAmount: T.number,
+    // This function is run before the onClick callback is executed (onClick
+    // is only called if onClickCheckFunc resolve to true or doesn't exist)
+    onClickCheckFunc: T.func,
+    // For Polygon Selector
+    onSelectionComplete: T.func,
+    onSelectionClear: T.func,
+    onSelectionUndo: T.func,
 
     annotations: T.arrayOf(
       T.shape({
@@ -84,46 +93,28 @@ export default compose(
 
     disableOverlay: T.bool,
     renderOverlay: T.func.isRequired,
-    allowTouch: T.bool
+    renderPolygonControls: T.func.isRequired
   }
 
   static defaultProps = defaultProps
 
-  targetRef = React.createRef();
-  componentDidMount() {
-    if (this.props.allowTouch) {
-      this.addTargetTouchEventListeners();
-    }
+  componentDidMount = () => {
+    window.addEventListener("resize", this.forceUpdateComponent);
   }
 
-  addTargetTouchEventListeners = () => {
-    // Safari does not recognize touch-action CSS property,
-    // so we need to call preventDefault ourselves to stop touch from scrolling
-    // Event handlers must be set via ref to enable e.preventDefault()
-    // https://github.com/facebook/react/issues/9809
-    
-    this.targetRef.current.ontouchstart = this.onTouchStart;
-    this.targetRef.current.ontouchend = this.onTouchEnd;
-    this.targetRef.current.ontouchmove = this.onTargetTouchMove;
-    this.targetRef.current.ontouchcancel = this.onTargetTouchLeave;
-    
-  }
-  removeTargetTouchEventListeners = () => {
-    this.targetRef.current.ontouchstart = undefined;
-    this.targetRef.current.ontouchend = undefined;
-    this.targetRef.current.ontouchmove = undefined;
-    this.targetRef.current.ontouchcancel = undefined;
+  componentWillUnmount = () => {
+    window.removeEventListener("resize", this.forceUpdateComponent);
   }
 
-  componentDidUpdate(prevProps) {
-    if (this.props.allowTouch !== prevProps.allowTouch) {
-      if (this.props.allowTouch) {
-        this.addTargetTouchEventListeners()
-      } else {
-        this.removeTargetTouchEventListeners()
-      }
-    }
+  forceUpdateComponent = () => {
+    this.forceUpdate();
   }
+
+  componentDidUpdate = prevProps => {
+     if (prevProps.imageZoomAmount !== this.props.imageZoomAmount) {
+       this.forceUpdateComponent();
+     }
+   }
 
   setInnerRef = (el) => {
     this.container = el
@@ -165,25 +156,25 @@ export default compose(
     this.props.relativeMousePos.onMouseMove(e)
     this.onMouseMove(e)
   }
-  onTargetTouchMove = (e) => {
-    this.props.relativeMousePos.onTouchMove(e)
-    this.onTouchMove(e)
-  }
 
   onTargetMouseLeave = (e) => {
     this.props.relativeMousePos.onMouseLeave(e)
-  }
-  onTargetTouchLeave = (e) => {
-    this.props.relativeMousePos.onTouchLeave(e)
   }
 
   onMouseUp = (e) => this.callSelectorMethod('onMouseUp', e)
   onMouseDown = (e) => this.callSelectorMethod('onMouseDown', e)
   onMouseMove = (e) => this.callSelectorMethod('onMouseMove', e)
-  onTouchStart = (e) => this.callSelectorMethod("onTouchStart", e)
-  onTouchEnd = (e) => this.callSelectorMethod("onTouchEnd", e)
-  onTouchMove = (e) => this.callSelectorMethod("onTouchMove", e)
-  onClick = (e) => this.callSelectorMethod('onClick', e)
+  onClick = (e) => {
+    const { onClickCheckFunc } = this.props;
+
+    if (!onClickCheckFunc || onClickCheckFunc(e)) {
+      return this.callSelectorMethod('onClick', e)
+    }
+    return;
+  }
+  onSelectionComplete = () => this.callSelectorMethod('onSelectionComplete')
+  onSelectionClear = () => this.callSelectorMethod('onSelectionClear')
+  onSelectionUndo = () => this.callSelectorMethod('onSelectionUndo')
 
   onSubmit = () => {
     this.props.onSubmit(this.props.value)
@@ -227,8 +218,6 @@ export default compose(
     }
   }
 
-  
-
   render () {
     const { props } = this
     const {
@@ -239,7 +228,7 @@ export default compose(
       renderSelector,
       renderEditor,
       renderOverlay,
-      allowTouch
+      renderPolygonControls
     } = props
 
     const topAnnotationAtMouse = this.getTopAnnotationAt(
@@ -252,8 +241,6 @@ export default compose(
         style={props.style}
         innerRef={isMouseHovering.innerRef}
         onMouseLeave={this.onTargetMouseLeave}
-        onTouchCancel={this.onTargetTouchLeave}
-        allowTouch={allowTouch}
       >
         <Img
           className={props.className}
@@ -282,7 +269,6 @@ export default compose(
           }
         </Items>
         <Target
-          innerRef={this.targetRef}
           onClick={this.onClick}
           onMouseUp={this.onMouseUp}
           onMouseDown={this.onMouseDown}
@@ -295,13 +281,14 @@ export default compose(
           })
         )}
         {props.annotations.map(annotation => (
-          this.shouldAnnotationBeActive(annotation, topAnnotationAtMouse)
-          && (
+          /* this.shouldAnnotationBeActive(annotation, topAnnotationAtMouse)
+          && ( */
             renderContent({
               key: annotation.data.id,
-              annotation: annotation
+              annotation: annotation,
+              imageZoomAmount: props.imageZoomAmount
             })
-          )
+          // )
         ))}
         {!props.disableEditor
           && props.value
@@ -311,11 +298,25 @@ export default compose(
             renderEditor({
               annotation: props.value,
               onChange: props.onChange,
-              onSubmit: this.onSubmit
+              onSubmit: this.onSubmit,
+              imageZoomAmount: props.imageZoomAmount
             })
           )
         }
-        <div>{props.children}</div>
+        {props.value
+          && props.value.geometry
+          && (props.value.geometry.type === PolygonSelector.TYPE)
+          && (!props.value.selection || !props.value.selection.showEditor)
+          && (
+            renderPolygonControls({
+              annotation: props.value,
+              onSelectionComplete: this.onSelectionComplete,
+              onSelectionClear: this.onSelectionClear,
+              onSelectionUndo: this.onSelectionUndo,
+              imageZoomAmount: props.imageZoomAmount
+            })
+          )
+        }
       </Container>
     )
   }
