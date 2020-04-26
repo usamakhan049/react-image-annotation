@@ -1,7 +1,6 @@
 import React from 'react'
 import LineTo from 'react-lineto'
 import styled from 'styled-components'
-import './index.css'
 
 const PointDot = styled.div`
   background: white;
