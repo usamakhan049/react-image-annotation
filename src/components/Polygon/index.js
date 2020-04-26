@@ -59,6 +59,7 @@ function Polygon (props) {
             borderStyle={'dashed'}
             borderWidth={2}
             className={(!props.active) ? "Polygon-LineTo" : "Polygon-LineToActive"}
+            within="linesContainer"
           />
         )
       })}
