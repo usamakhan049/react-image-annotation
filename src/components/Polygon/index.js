@@ -32,15 +32,15 @@ function Polygon (props) {
   if (!geometry || !geometry.points || geometry.points.length === 0) return null
 
   return (
-    <div
-      className={`linesContainer ${props.className}`}
-      style={{
-        width: '100%',
-        height: '100%',
-        ...props.style
-      }}
-    >
-    <svg width="100%" height="100%">
+    // <div
+    //   className={`linesContainer ${props.className}`}
+    //   style={{
+    //     width: '100%',
+    //     height: '100%',
+    //     ...props.style
+    //   }}
+    // >
+    <svg >
       {(geometry.points.length >= 3) && geometry.points.map((item,i) => { // Iterate over points to create the edge lines
         let prevItem
         if (i === 0) { // First point (links from last to first)
@@ -64,14 +64,13 @@ function Polygon (props) {
           //   //delay={false}
           // />
 
-          <line x1={item.x+"%"} y1={item.y+"%"} x2={prevItem.x+"%"} y2={prevItem.y+"%"} stroke="red" width="3px"/>
+          <line x1={item.x+"%"} y1={item.y+"%"} x2={prevItem.x+"%"} y2={prevItem.y+"%"} stroke="red" className="polygon-line"/>
 
           // <div class="Polygon-LineTo"  style={{borderTop: "2px dashed white",width: item.width+"% ",
           //  position: "absolute", top: item.y+"%", left: item.x+"%",  transform: "rotate(80.2635deg)", transformOrigin: "0px 0px"}}></div>
         )
       })}
       
-      </svg>
       {geometry.points.map((item,i) => { // Iterate over points to points
         return (
           // Note that each LineTo element must have a unique key (unique relative to the point)
@@ -84,7 +83,9 @@ function Polygon (props) {
           />
         )
       })}
-    </div>
+      
+    {/* </div> */}
+    </svg>
   )
 }
 

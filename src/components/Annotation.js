@@ -231,6 +231,8 @@ export default compose(
       renderPolygonControls
     } = props
 
+    var polygonAnnotation=[]
+
     const topAnnotationAtMouse = this.getTopAnnotationAt(
       this.props.relativeMousePos.x,
       this.props.relativeMousePos.y
@@ -251,17 +253,59 @@ export default compose(
           innerRef={this.setInnerRef}
         />
         <Items>
-          {props.annotations.map(annotation => (
-            renderHighlight({
-              key: annotation.data.id,
-              annotation,
-              active: this.shouldAnnotationBeActive(annotation, topAnnotationAtMouse)
-            })
-          ))}
+          {props.annotations.map(annotation => {
+            console.log("**",annotation)
+            if(annotation.geometry.type===PolygonSelector.TYPE){
+           polygonAnnotation.push(annotation)
+          }else{
+            return(
+              renderHighlight({
+                key: annotation.data.id,
+                annotation,
+                active: this.shouldAnnotationBeActive(annotation, topAnnotationAtMouse)
+              })
+              )
+          }
+          })}
+          <svg width="100%" height="100%">
+          {polygonAnnotation.map(annotation=>{
+            return(
+              renderHighlight({
+                key: annotation.data.id,
+                annotation,
+                active: this.shouldAnnotationBeActive(annotation, topAnnotationAtMouse)
+              })
+              )
+          
+          })}
+
+{!props.disableSelector
+            && props.value
+            && props.value.geometry
+            && (props.value.geometry.type === PolygonSelector.TYPE?
+              //console.log("*******",props.value)
+              //polygonAnnotation.push(props.value)
+              renderSelector({
+                annotation: props.value
+              })
+              :
+               console.log("*******",props.value)
+              // renderSelector({
+              //   annotation: props.value
+              // })
+            )
+          }
+          </svg>
           {!props.disableSelector
             && props.value
             && props.value.geometry
-            && (
+            && (props.value.geometry.type === PolygonSelector.TYPE?
+              console.log("*******",props.value)
+              // polygonAnnotation.push(props.value)
+              // renderSelector({
+              //   annotation: props.value
+              // })
+              :
               renderSelector({
                 annotation: props.value
               })
