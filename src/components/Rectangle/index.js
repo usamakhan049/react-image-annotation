@@ -2,8 +2,9 @@ import React from 'react'
 import styled from 'styled-components'
 
 const Container = styled.div`
-  border: dashed 2px black;
   box-shadow: 0px 0px 1px 1px white inset;
+  border: solid 3px #1976d2;
+  background-color: rgba(25, 118, 210, 0.27);
   box-sizing: border-box;
   transition: box-shadow 0.21s ease-in-out;
 `
