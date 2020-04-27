@@ -40,6 +40,7 @@ function Polygon (props) {
         ...props.style
       }}
     >
+    <svg width="100%" height="100%">
       {(geometry.points.length >= 3) && geometry.points.map((item,i) => { // Iterate over points to create the edge lines
         let prevItem
         if (i === 0) { // First point (links from last to first)
@@ -49,20 +50,28 @@ function Polygon (props) {
         }
         return (
           // Note that each LineTo element must have a unique key (unique relative to the connected points)
-          <LineTo
-            key={i + "_" + item.x + "_" + item.y + "_" + prevItem.x + "_" + prevItem.y}
-            from="linesContainer"
-            fromAnchor={item.x + "% " + item.y + "%"}
-            to="linesContainer"
-            toAnchor={prevItem.x + "% " + prevItem.y + "%"}
-            borderColor={'white'}
-            borderStyle={'dashed'}
-            borderWidth={2}
-            className={(!props.active) ? "Polygon-LineTo" : "Polygon-LineToActive"}
-            within="linesContainer"
-          />
+          // <LineTo
+          //   key={i + "_" + item.x + "_" + item.y + "_" + prevItem.x + "_" + prevItem.y}
+          //   from="linesContainer"
+          //   fromAnchor={item.x + "% " + item.y + "%"}
+          //   to="linesContainer"
+          //   toAnchor={prevItem.x + "% " + prevItem.y + "%"}
+          //   borderColor={'white'}
+          //   borderStyle={'dashed'}
+          //   borderWidth={2}
+          //   className={(!props.active) ? "Polygon-LineTo" : "Polygon-LineToActive"}
+          //   within="linesContainer"
+          //   //delay={false}
+          // />
+
+          <line x1={item.x+"%"} y1={item.y+"%"} x2={prevItem.x+"%"} y2={prevItem.y+"%"} stroke="red" width="3px"/>
+
+          // <div class="Polygon-LineTo"  style={{borderTop: "2px dashed white",width: item.width+"% ",
+          //  position: "absolute", top: item.y+"%", left: item.x+"%",  transform: "rotate(80.2635deg)", transformOrigin: "0px 0px"}}></div>
         )
       })}
+      
+      </svg>
       {geometry.points.map((item,i) => { // Iterate over points to points
         return (
           // Note that each LineTo element must have a unique key (unique relative to the point)
