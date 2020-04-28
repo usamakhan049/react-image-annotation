@@ -48,7 +48,7 @@ function Editor (props) {
       }}
     >
       <Container>
-        {(geometry.type === PolygonSelector.TYPE) &&
+        {/* {(geometry.type === PolygonSelector.TYPE) &&
           <RadioButtonEditor
             onChangeAge={e => props.onChange({
               ...props.annotation,
@@ -70,7 +70,7 @@ function Editor (props) {
             imageZoomAmount={props.imageZoomAmount}
           />
         }
-        {(geometry.type !== PolygonSelector.TYPE) &&
+        {(geometry.type !== PolygonSelector.TYPE) && */}
           <TextEditor
             onChange={e => props.onChange({
               ...props.annotation,
@@ -82,7 +82,7 @@ function Editor (props) {
             onSubmit={props.onSubmit}
             value={props.annotation.data && props.annotation.data.text}
           />
-        }
+        {/* } */}
       </Container>
     </div>
   )

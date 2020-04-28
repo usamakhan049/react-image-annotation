@@ -51,6 +51,18 @@ const Button = styled.div`
   }
 `
 
+function getLastPonitY(geometry){
+  if (!geometry || !geometry.points || geometry.points.length === 0) return null
+    return geometry.points[geometry.points.length-1].y
+
+}
+
+function getLastPonitX(geometry){
+  if (!geometry || !geometry.points || geometry.points.length === 0) return null
+    return geometry.points[geometry.points.length-1].y
+
+}
+
 function PolygonControls (props) {
   const { geometry } = props.annotation
   // Only show polygon controls if there are at least three points set
@@ -62,12 +74,15 @@ function PolygonControls (props) {
   const paddingHorizontal = (((1 / 5) * 8) + ((4 / 5) * 8 * zoomBetweenZeroAndOne));
   const paddingVertical = (((1 / 5) * 16) + ((4 / 5) * 16 * (zoomBetweenZeroAndOne)));
 
+  //left: `${getHorizontallyCentralPoint(geometry.points)}%`,
+  //top: `${(getVerticallyLowestPoint(geometry.points) + ((10 * (1 / 5)) + (10 * (4 / 5) * zoomBetweenZeroAndOne)))}%`,
+
   return (
     <div
       style={{
         position: 'absolute',
-        left: `${getHorizontallyCentralPoint(geometry.points)}%`,
-        top: `${(getVerticallyLowestPoint(geometry.points) + ((10 * (1 / 5)) + (10 * (4 / 5) * zoomBetweenZeroAndOne)))}%`,
+        left: `${getLastPonitX(geometry)}%`,
+        top: `${getLastPonitY(geometry)}%`,
         ...props.style
       }}
     >

@@ -38,7 +38,7 @@ export default {
     switch (annotation.geometry.type) {
       case RectangleSelector.TYPE:
         return (
-          <FancyRectangle
+          <Rectangle
             annotation={annotation}
           />
         )

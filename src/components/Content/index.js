@@ -38,9 +38,9 @@ function Content (props) {
       <Container
         style={{fontSize: (((1 / 5) + (zoomBetweenZeroAndOne * (4 / 5))) + 'rem'), padding: ((((1 / 5) * 8) + ((4 / 5) * 8 * zoomBetweenZeroAndOne)) + 'px ' + (((1 / 5) * 16) + ((4 / 5) * 16 * zoomBetweenZeroAndOne)) + 'px')}}
       >
-        {props.annotation.data && props.annotation.data.age}
-        {' - '}
-        {props.annotation.data && props.annotation.data.renovationType}
+        {props.annotation.data && props.annotation.data.text}
+        {/* {' - '}
+        {props.annotation.data && props.annotation.data.renovationType} */}
       </Container>
     </div>
   )
