@@ -40,7 +40,8 @@ function Polygon (props) {
     //     ...props.style
     //   }}
     // >
-    <svg >
+    <svg>
+      
       {(geometry.points.length >= 3) && geometry.points.map((item,i) => { // Iterate over points to create the edge lines
         let prevItem
         if (i === 0) { // First point (links from last to first)
@@ -48,6 +49,7 @@ function Polygon (props) {
         } else {
           prevItem = geometry.points[i - 1]
         }
+        
         return (
           // Note that each LineTo element must have a unique key (unique relative to the connected points)
           // <LineTo
@@ -64,13 +66,13 @@ function Polygon (props) {
           //   //delay={false}
           // />
 
-          <line x1={item.x+"%"} y1={item.y+"%"} x2={prevItem.x+"%"} y2={prevItem.y+"%"} stroke="#1976d2" stroke-width="3px" className="polygon-line"/>
+           <line x1={item.x+"%"} y1={item.y+"%"} x2={prevItem.x+"%"} y2={prevItem.y+"%"} stroke="#1976d2" stroke-width="3px" className="polygon-line"/>
 
           // <div class="Polygon-LineTo"  style={{borderTop: "2px dashed white",width: item.width+"% ",
           //  position: "absolute", top: item.y+"%", left: item.x+"%",  transform: "rotate(80.2635deg)", transformOrigin: "0px 0px"}}></div>
         )
       })}
-      
+     
       {geometry.points.map((item,i) => { // Iterate over points to points
         return (
           // Note that each LineTo element must have a unique key (unique relative to the point)

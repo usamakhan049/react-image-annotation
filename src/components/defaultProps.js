@@ -130,21 +130,24 @@ export default {
     switch (type) {
       case PointSelector.TYPE:
         return (
-          <Overlay>
-            Click to Annotate
-          </Overlay>
+          ""
+          // <Overlay>
+          //   Click to Annotate
+          // </Overlay>
         )
       case PolygonSelector.TYPE:
         return (
-          <Overlay>
-            Click to Add Points to Annotation
-          </Overlay>
+          ""
+          // <Overlay>
+          //   Click to Add Points to Annotation
+          // </Overlay>
         )
       default:
         return (
-          <Overlay>
-            Click and Drag to Annotate
-          </Overlay>
+          ""
+          // <Overlay>
+          //   Click and Drag to Annotate
+          // </Overlay>
         )
     }
   }
