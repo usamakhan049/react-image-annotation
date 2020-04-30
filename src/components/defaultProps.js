@@ -33,31 +33,37 @@ export default {
   disableEditor: false,
   disableOverlay: false,
   imageZoomAmount: 1,
+  zoomScale:1,
+  showActiveAnnotations:(annotation,active)=>{},
   activeAnnotationComparator: (a, b) => a === b,
-  renderSelector: ({ annotation }) => {
+  renderSelector: ({ annotation,zoomScale }) => {
     switch (annotation.geometry.type) {
       case RectangleSelector.TYPE:
         return (
           <Rectangle
             annotation={annotation}
+            zoomScale={zoomScale}
           />
         )
       case PointSelector.TYPE:
         return (
           <Point
             annotation={annotation}
+            zoomScale={zoomScale}
           />
         )
       case OvalSelector.TYPE:
         return (
           <Oval
             annotation={annotation}
+            zoomScale={zoomScale}
           />
         )
       case PolygonSelector.TYPE:
         return (
           <Polygon
             annotation={annotation}
+            zoomScale={zoomScale}
           />
         )
       default:
@@ -81,7 +87,7 @@ export default {
       imageZoomAmount={imageZoomAmount}
     />
   ),
-  renderHighlight: ({ key, annotation, active }) => {
+  renderHighlight: ({ key, annotation, active,zoomScale }) => {
     switch (annotation.geometry.type) {
       case RectangleSelector.TYPE:
         return (
@@ -89,6 +95,7 @@ export default {
             key={key}
             annotation={annotation}
             active={active}
+            zoomScale={zoomScale}
           />
         )
       case PointSelector.TYPE:
@@ -97,6 +104,7 @@ export default {
             key={key}
             annotation={annotation}
             active={active}
+            zoomScale={zoomScale}
           />
         )
       case OvalSelector.TYPE:
@@ -105,6 +113,7 @@ export default {
             key={key}
             annotation={annotation}
             active={active}
+            zoomScale={zoomScale}
           />
         )
       case PolygonSelector.TYPE:
@@ -113,17 +122,19 @@ export default {
             key={key}
             annotation={annotation}
             active={active}
+            zoomScale={zoomScale}
           />
         )
       default:
         return null
     }
   },
-  renderContent: ({ key, annotation, imageZoomAmount }) => (
+  renderContent: ({ key, annotation, imageZoomAmount,zoomScale}) => (
     <Content
       key={key}
       annotation={annotation}
       imageZoomAmount={imageZoomAmount}
+      zoomScale={zoomScale}
     />
   ),
   renderOverlay: ({ type, annotation }) => {

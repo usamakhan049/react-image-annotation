@@ -36,7 +36,14 @@ function Content (props) {
       geometry={geometry}
     >
       <Container
-        style={{fontSize: (((1 / 5) + (zoomBetweenZeroAndOne * (4 / 5))) + 'rem'), padding: ((((1 / 5) * 8) + ((4 / 5) * 8 * zoomBetweenZeroAndOne)) + 'px ' + (((1 / 5) * 16) + ((4 / 5) * 16 * zoomBetweenZeroAndOne)) + 'px')}}
+      style={{
+        fontSize: props.zoomScale>=2 && props.zoomScale<=3.5?10:
+        props.zoomScale>3.5 && props.zoomScale<=8?6:12,
+        paddingRight: props.zoomScale>=2 && props.zoomScale<=3.5? 3:
+        props.zoomScale>3.5 && props.zoomScale<=8? 2:8,
+        paddingLeft: props.zoomScale>=2 && props.zoomScale<=3.5? 3:
+        props.zoomScale>3.5 && props.zoomScale<=8? 2:8,}}
+        //style={{fontSize: (((1 / 5) + (zoomBetweenZeroAndOne * (4 / 5))) + 'rem'), padding: ((((1 / 5) * 8) + ((4 / 5) * 8 * zoomBetweenZeroAndOne)) + 'px ' + (((1 / 5) * 16) + ((4 / 5) * 16 * zoomBetweenZeroAndOne)) + 'px')}}
       >
         {props.annotation.data && props.annotation.data.text}
         {/* {' - '}

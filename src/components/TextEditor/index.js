@@ -80,7 +80,6 @@ function TextEditor (props) {
         visible={true}
         placement="bottom"
       >
-      {console.log("************11",props)}
         {/* <Row
           style={{
             position: "absolute",

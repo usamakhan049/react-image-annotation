@@ -24,7 +24,11 @@ function Point (props) {
     <Container
       style={{
         top: `${geometry.y}%`,
-        left: `${geometry.x}%`
+        left: `${geometry.x}%`,
+        height:`${props.zoomScale>=2 && props.zoomScale<=3.5?"12px":
+        props.zoomScale>3.5 && props.zoomScale<=8?"8px":"16px"}`,
+        width:`${props.zoomScale>=2 && props.zoomScale<=3.5?"12px":
+        props.zoomScale>3.5 && props.zoomScale<=8?"8px":"16px"}`
       }}
     />
   )

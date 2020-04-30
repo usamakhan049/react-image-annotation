@@ -93,7 +93,10 @@ export default compose(
 
     disableOverlay: T.bool,
     renderOverlay: T.func.isRequired,
-    renderPolygonControls: T.func.isRequired
+    renderPolygonControls: T.func.isRequired,
+
+    showActiveAnnotations: T.func.isRequired,
+    zoomScale: T.number.isRequired
   }
 
   static defaultProps = defaultProps
@@ -228,7 +231,9 @@ export default compose(
       renderSelector,
       renderEditor,
       renderOverlay,
-      renderPolygonControls
+      renderPolygonControls,
+      showActiveAnnotations,
+      zoomScale
     } = props
 
     var polygonAnnotation=[]
@@ -254,7 +259,6 @@ export default compose(
         />
         <Items>
           {props.annotations.map(annotation => {
-            console.log("**",annotation)
             if(annotation.geometry.type===PolygonSelector.TYPE){
            polygonAnnotation.push(annotation)
           }else{
@@ -262,10 +266,16 @@ export default compose(
               renderHighlight({
                 key: annotation.data.id,
                 annotation,
-                active: this.shouldAnnotationBeActive(annotation, topAnnotationAtMouse)
+                active: this.shouldAnnotationBeActive(annotation, topAnnotationAtMouse),
+                zoomScale
               })
               )
           }
+          })}
+          {props.annotations.map((annotation)=>{
+            showActiveAnnotations(annotation,
+                this.shouldAnnotationBeActive(annotation, topAnnotationAtMouse))
+            
           })}
           <svg width="100%" height="100%">
           {polygonAnnotation.map(annotation=>{
@@ -273,7 +283,8 @@ export default compose(
               renderHighlight({
                 key: annotation.data.id,
                 annotation,
-                active: this.shouldAnnotationBeActive(annotation, topAnnotationAtMouse)
+                active: this.shouldAnnotationBeActive(annotation, topAnnotationAtMouse),
+                zoomScale
               })
               )
           
@@ -283,13 +294,13 @@ export default compose(
             && props.value
             && props.value.geometry
             && (props.value.geometry.type === PolygonSelector.TYPE?
-              //console.log("*******",props.value)
               //polygonAnnotation.push(props.value)
               renderSelector({
-                annotation: props.value
+                annotation: props.value,
+                zoomScale
               })
               :
-               console.log("*******",props.value)
+              ""
               // renderSelector({
               //   annotation: props.value
               // })
@@ -300,14 +311,15 @@ export default compose(
             && props.value
             && props.value.geometry
             && (props.value.geometry.type === PolygonSelector.TYPE?
-              console.log("*******",props.value)
+              ""
               // polygonAnnotation.push(props.value)
               // renderSelector({
               //   annotation: props.value
               // })
               :
               renderSelector({
-                annotation: props.value
+                annotation: props.value,
+                zoomScale
               })
             )
           }
@@ -330,7 +342,8 @@ export default compose(
             renderContent({
               key: annotation.data.id,
               annotation: annotation,
-              imageZoomAmount: props.imageZoomAmount
+              imageZoomAmount: props.imageZoomAmount,
+              zoomScale
             })
            )
         ))}

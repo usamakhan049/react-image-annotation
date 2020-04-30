@@ -24,6 +24,8 @@ function Oval (props) {
         height: `${geometry.height}%`,
         width: `${geometry.width}%`,
         boxShadow: props.active && '0 0 1px 1px yellow inset',
+        borderWidth:`${props.zoomScale>=2 && props.zoomScale<=3.5?"2px":
+        props.zoomScale>3.5 && props.zoomScale<=8?"1px":"3px"}`,
         ...props.style
       }}
     />

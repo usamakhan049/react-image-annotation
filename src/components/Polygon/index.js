@@ -66,7 +66,9 @@ function Polygon (props) {
           //   //delay={false}
           // />
 
-           <line x1={item.x+"%"} y1={item.y+"%"} x2={prevItem.x+"%"} y2={prevItem.y+"%"} stroke="#1976d2" stroke-width="3px" className="polygon-line"/>
+           <line x1={item.x+"%"} y1={item.y+"%"} x2={prevItem.x+"%"} y2={prevItem.y+"%"} stroke="#1976d2" 
+           stroke-width={props.zoomScale>=2 && props.zoomScale<=3.5?"2px":
+           props.zoomScale>3.5 && props.zoomScale<=8?"1px":"3px"} className="polygon-line"/>
 
           // <div class="Polygon-LineTo"  style={{borderTop: "2px dashed white",width: item.width+"% ",
           //  position: "absolute", top: item.y+"%", left: item.x+"%",  transform: "rotate(80.2635deg)", transformOrigin: "0px 0px"}}></div>
@@ -83,7 +85,8 @@ function Polygon (props) {
           //     top: item.y + "%"
           //   }}
           // />
-          <circle cx={item.x + "% "} cy={item.y+"%"} r="1" stroke="white" stroke-width="1" fill="white" />
+          <circle cx={item.x + "% "} cy={item.y+"%"} r="1" stroke="white" stroke-width={props.zoomScale>=2 && props.zoomScale<=3.5?"0.6px":
+          props.zoomScale>3.5 && props.zoomScale<=8?"0.2px":"1px"} fill="white" />
         )
       })}
       
