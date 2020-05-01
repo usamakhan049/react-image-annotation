@@ -6,7 +6,6 @@ const styles = css`
   border: 0;
   color: white;
   cursor: pointer;
-  font-family: Montserrat;
   font-size: 13px;
   font-weight: 700;
   outline: 0;

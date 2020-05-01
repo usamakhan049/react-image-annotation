@@ -1,5 +1,5 @@
 import React from 'react'
-import LineTo from 'react-lineto'
+//import LineTo from 'react-lineto'
 import styled from 'styled-components'
 
 const PointDot = styled.div`
