@@ -75,8 +75,8 @@ function Polygon (props) {
         //)
       })}
 
-      <polygon points={points} style={{fill:"rgba(25, 118, 210, 0.27)",stroke:"#1976d2",strokeWidth:`${props.zoomScale>=2 && props.zoomScale<=3.5?"0.3px":
-           props.zoomScale>3.5 && props.zoomScale<=8?"0.15px":"0.4px"}`}} className="polygon-line"/>
+      <polygon points={points} style={{fill:"rgba(25, 118, 210, 0.27)",stroke:"#1976d2",strokeWidth:`${props.zoomScale>=2 && props.zoomScale<=3.5?"0.2px":
+           props.zoomScale>3.5 && props.zoomScale<=8?"0.1px":"0.275px"}`}} className="polygon-line"/>
 
       {geometry.points.map((item,i) => { // Iterate over points to points
         return (
@@ -88,8 +88,8 @@ function Polygon (props) {
           //     top: item.y + "%"
           //   }}
           // />
-          <circle cx={item.x + "% "} cy={item.y+"%"} r="0.3" stroke="white" stroke-width={props.zoomScale>=2 && props.zoomScale<=3.5?"0.2px":
-          props.zoomScale>3.5 && props.zoomScale<=8?"0.1px":"0.3px"} fill="white" />
+          <circle cx={item.x + "% "} cy={item.y+"%"} r="0.1" stroke="white" stroke-width={props.zoomScale>=2 && props.zoomScale<=3.5?"0.1px":
+          props.zoomScale>3.5 && props.zoomScale<=8?"0.05px":"0.2px"} fill="white" />
         )
       })}
       
