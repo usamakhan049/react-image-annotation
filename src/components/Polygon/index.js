@@ -51,7 +51,7 @@ function Polygon (props) {
         }
         points=points+" "+item.x+","+item.y
         
-        //return (
+        return (
           // Note that each LineTo element must have a unique key (unique relative to the connected points)
           // <LineTo
           //   key={i + "_" + item.x + "_" + item.y + "_" + prevItem.x + "_" + prevItem.y}
@@ -66,15 +66,15 @@ function Polygon (props) {
           //   within="linesContainer"
           //   //delay={false}
           // />
-          //  <line x1={item.x+"%"} y1={item.y+"%"} x2={prevItem.x+"%"} y2={prevItem.y+"%"} stroke="#1976d2" 
-          //  stroke-width={props.zoomScale>=2 && props.zoomScale<=3.5?"2px":
-          //  props.zoomScale>3.5 && props.zoomScale<=8?"1px":"3px"} className="polygon-line"/>
+           <line x1={item.x+"%"} y1={item.y+"%"} x2={prevItem.x+"%"} y2={prevItem.y+"%"} stroke={props.active? "yellow":"white"} 
+           stroke-width={props.zoomScale>=2 && props.zoomScale<=3.5?"0.3px":
+           props.zoomScale>3.5 && props.zoomScale<=8?"0.2px":"0.4px"} className="polygon-line"/>
 
           // <div class="Polygon-LineTo"  style={{borderTop: "2px dashed white",width: item.width+"% ",
           //  position: "absolute", top: item.y+"%", left: item.x+"%",  transform: "rotate(80.2635deg)", transformOrigin: "0px 0px"}}></div>
-        //)
+        )
       })}
-
+      
       <polygon points={points} style={{fill:"rgba(25, 118, 210, 0.27)",stroke:"#1976d2",strokeWidth:`${props.zoomScale>=2 && props.zoomScale<=3.5?"0.2px":
            props.zoomScale>3.5 && props.zoomScale<=8?"0.1px":"0.275px"}`}} className="polygon-line"/>
 
@@ -89,7 +89,7 @@ function Polygon (props) {
           //   }}
           // />
           <circle cx={item.x + "% "} cy={item.y+"%"} r="0.1" stroke="white" stroke-width={props.zoomScale>=2 && props.zoomScale<=3.5?"0.1px":
-          props.zoomScale>3.5 && props.zoomScale<=8?"0.05px":"0.2px"} fill="white" />
+          props.zoomScale>3.5 && props.zoomScale<=8?"0.05px":"0.2px"} fill="#1976d2" stroke="white" />
         )
       })}
       
