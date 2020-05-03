@@ -68,7 +68,7 @@ function Polygon (props) {
           // />
            <line x1={item.x+"%"} y1={item.y+"%"} x2={prevItem.x+"%"} y2={prevItem.y+"%"} stroke={props.active? "yellow":"white"} 
            stroke-width={props.zoomScale>=2 && props.zoomScale<=3.5?"0.3px":
-           props.zoomScale>3.5 && props.zoomScale<=8?"0.2px":"0.4px"} className="polygon-line"/>
+           props.zoomScale>3.5 && props.zoomScale<=8?"0.15px":"0.4px"} className="polygon-line"/>
 
           // <div class="Polygon-LineTo"  style={{borderTop: "2px dashed white",width: item.width+"% ",
           //  position: "absolute", top: item.y+"%", left: item.x+"%",  transform: "rotate(80.2635deg)", transformOrigin: "0px 0px"}}></div>
