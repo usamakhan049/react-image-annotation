@@ -89,7 +89,7 @@ function Polygon (props) {
           //   }}
           // />
           <circle cx={item.x + "% "} cy={item.y+"%"} r="0.1" stroke="white" stroke-width={props.zoomScale>=2 && props.zoomScale<=3.5?"0.1px":
-          props.zoomScale>3.5 && props.zoomScale<=8?"0.05px":"0.2px"} fill="#1976d2" stroke="white" />
+          props.zoomScale>3.5 && props.zoomScale<=8?"0.05px":"0.2px"} fill="#1976d2" stroke={props.active? "yellow":"white"} />
         )
       })}
       
