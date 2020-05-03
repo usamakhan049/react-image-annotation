@@ -78,13 +78,14 @@ export default {
       imageZoomAmount={imageZoomAmount}
     />
   ),
-  renderPolygonControls: ({ annotation, onSelectionComplete, onSelectionClear, onSelectionUndo, imageZoomAmount }) => (
+  renderPolygonControls: ({ annotation, onSelectionComplete, onSelectionClear, onSelectionUndo, imageZoomAmount,disableAnnotation }) => (
     <PolygonControls
       annotation={annotation}
       onSelectionComplete={onSelectionComplete}
       onSelectionClear={onSelectionClear}
       onSelectionUndo={onSelectionUndo}
       imageZoomAmount={imageZoomAmount}
+      disableAnnotation={disableAnnotation}
     />
   ),
   renderHighlight: ({ key, annotation, active,zoomScale }) => {

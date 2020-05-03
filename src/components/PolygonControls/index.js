@@ -83,6 +83,7 @@ function PolygonControls (props) {
         position: 'absolute',
         left: `${getLastPonitX(geometry)}%`,
         top: `${getLastPonitY(geometry)}%`,
+        display: props.disableAnnotation && "none",
         ...props.style
       }}
     >

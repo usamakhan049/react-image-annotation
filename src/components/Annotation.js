@@ -370,7 +370,8 @@ export default compose(
               onSelectionComplete: this.onSelectionComplete,
               onSelectionClear: this.onSelectionClear,
               onSelectionUndo: this.onSelectionUndo,
-              imageZoomAmount: props.imageZoomAmount
+              imageZoomAmount: props.imageZoomAmount,
+              disableAnnotation:props.disableAnnotation
             })
           )
         }
