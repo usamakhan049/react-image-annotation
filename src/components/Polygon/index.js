@@ -1,6 +1,9 @@
 import React from 'react'
 //import LineTo from 'react-lineto'
 import styled from 'styled-components'
+import {POLYGON_WIDTH,POLYGON_FIRST_ZOOM_WIDTH,POLYGON_SECOND_ZOOM_WIDTH,
+POLYGON_HIGHLIGHT_WIDTH,POLYGON_HIGHLIGHT_FIRST_ZOOM_WIDTH,POLYGON_HIGHLIGHT_SECOND_ZOOM_WIDTH,
+POLYGON_POINTS_WIDTH,POLYGON_POINTS_FIRST_ZOOM_WIDTH,POLYGON_POINTS_SECOND_ZOOM_WIDTH} from '../../utils/Constants'
 
 const PointDot = styled.div`
   background: white;
@@ -67,16 +70,16 @@ function Polygon (props) {
           //   //delay={false}
           // />
            <line x1={item.x+"%"} y1={item.y+"%"} x2={prevItem.x+"%"} y2={prevItem.y+"%"} stroke={props.active? "yellow":"white"} 
-           stroke-width={props.zoomScale>=2 && props.zoomScale<=3.5?"0.3px":
-           props.zoomScale>3.5 && props.zoomScale<=8?"0.15px":"0.4px"} className="polygon-line"/>
+           stroke-width={props.zoomScale>=2 && props.zoomScale<=3.5? POLYGON_HIGHLIGHT_FIRST_ZOOM_WIDTH+"px":
+           props.zoomScale>3.5 && props.zoomScale<=8? POLYGON_HIGHLIGHT_SECOND_ZOOM_WIDTH+"px" :POLYGON_HIGHLIGHT_WIDTH+"px"} className="polygon-line"/>
 
           // <div class="Polygon-LineTo"  style={{borderTop: "2px dashed white",width: item.width+"% ",
           //  position: "absolute", top: item.y+"%", left: item.x+"%",  transform: "rotate(80.2635deg)", transformOrigin: "0px 0px"}}></div>
         )
       })}
       
-      <polygon points={points} style={{fill:"rgba(25, 118, 210, 0.27)",stroke:"#1976d2",strokeWidth:`${props.zoomScale>=2 && props.zoomScale<=3.5?"0.2px":
-           props.zoomScale>3.5 && props.zoomScale<=8?"0.1px":"0.275px"}`}} className="polygon-line"/>
+      <polygon points={points} style={{fill:"rgba(25, 118, 210, 0.27)",stroke:"#1976d2",strokeWidth:`${props.zoomScale>=2 && props.zoomScale<=3.5? POLYGON_FIRST_ZOOM_WIDTH+"px":
+           props.zoomScale>3.5 && props.zoomScale<=8?POLYGON_SECOND_ZOOM_WIDTH+"px":POLYGON_WIDTH+"px"}`}} className="polygon-line"/>
 
       {geometry.points.map((item,i) => { // Iterate over points to points
         return (
@@ -88,8 +91,8 @@ function Polygon (props) {
           //     top: item.y + "%"
           //   }}
           // />
-          <circle cx={item.x + "% "} cy={item.y+"%"} r="0.1" stroke="white" stroke-width={props.zoomScale>=2 && props.zoomScale<=3.5?"0.1px":
-          props.zoomScale>3.5 && props.zoomScale<=8?"0.05px":"0.2px"} fill="#1976d2" stroke={props.active? "yellow":"white"} />
+          <circle cx={item.x + "% "} cy={item.y+"%"} r="0.1" stroke="white" stroke-width={props.zoomScale>=2 && props.zoomScale<=3.5? POLYGON_POINTS_FIRST_ZOOM_WIDTH+"px":
+          props.zoomScale>3.5 && props.zoomScale<=8? POLYGON_POINTS_SECOND_ZOOM_WIDTH+"px":POLYGON_POINTS_WIDTH+"px"} fill="#1976d2" stroke={props.active? "yellow":"white"} />
         )
       })}
       

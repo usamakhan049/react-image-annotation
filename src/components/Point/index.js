@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import {POINTS_WIDTH,POINTS_FIRST_ZOOM_WIDTH,POINTS_SECOND_ZOOM_WIDTH} from '../../utils/Constants'
 
 const Container = styled.div`
   border: solid 3px #1976d2;
@@ -25,10 +26,10 @@ function Point (props) {
       style={{
         top: `${geometry.y}%`,
         left: `${geometry.x}%`,
-        height:`${props.zoomScale>=2 && props.zoomScale<=3.5?"12px":
-        props.zoomScale>3.5 && props.zoomScale<=8?"8px":"16px"}`,
-        width:`${props.zoomScale>=2 && props.zoomScale<=3.5?"12px":
-        props.zoomScale>3.5 && props.zoomScale<=8?"8px":"16px"}`
+        height:`${props.zoomScale>=2 && props.zoomScale<=3.5? POINTS_FIRST_ZOOM_WIDTH+"px":
+        props.zoomScale>3.5 && props.zoomScale<=8? POINTS_SECOND_ZOOM_WIDTH+"px":POINTS_WIDTH+"px"}`,
+        width:`${props.zoomScale>=2 && props.zoomScale<=3.5? POINTS_FIRST_ZOOM_WIDTH+"px":
+        props.zoomScale>3.5 && props.zoomScale<=8? POINTS_SECOND_ZOOM_WIDTH+"px":POINTS_WIDTH+"px"}`
       }}
     />
   )

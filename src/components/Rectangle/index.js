@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import {RECTANGLE_WIDTH,RECTANGLE_FIRST_ZOOM_WIDTH,RECTANGLE_SECOND_ZOOM_WIDTH} from '../../utils/Constants'
 
 const Container = styled.div`
   box-shadow: 0px 0px 1px 1px white inset;
@@ -22,8 +23,8 @@ function Rectangle (props) {
         height: `${geometry.height}%`,
         width: `${geometry.width}%`,
         boxShadow: props.active && '0 0 1px 1px yellow inset',
-        borderWidth:`${props.zoomScale>=2 && props.zoomScale<=3.5?"2px":
-        props.zoomScale>3.5 && props.zoomScale<=8?"1px":"3px"}`,
+        borderWidth:`${props.zoomScale>=2 && props.zoomScale<=3.5?RECTANGLE_FIRST_ZOOM_WIDTH+"px":
+        props.zoomScale>3.5 && props.zoomScale<=8?RECTANGLE_SECOND_ZOOM_WIDTH+"px":RECTANGLE_WIDTH+"px"}`,
         ...props.style
       }}
     />

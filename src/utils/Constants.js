@@ -1,0 +1,23 @@
+export const RECTANGLE_WIDTH = 2;
+export const RECTANGLE_FIRST_ZOOM_WIDTH = 1;
+export const RECTANGLE_SECOND_ZOOM_WIDTH = 0.7;
+
+export const OVAL_WIDTH = 2;
+export const OVAL_FIRST_ZOOM_WIDTH = 1;
+export const OVAL_SECOND_ZOOM_WIDTH = 0.7;
+
+export const POINTS_WIDTH = 16;
+export const POINTS_FIRST_ZOOM_WIDTH = 12;
+export const POINTS_SECOND_ZOOM_WIDTH = 8;
+
+export const POLYGON_WIDTH = 0.2;
+export const POLYGON_FIRST_ZOOM_WIDTH = 0.1;
+export const POLYGON_SECOND_ZOOM_WIDTH = 0.07;
+
+export const POLYGON_HIGHLIGHT_WIDTH = 0.3;
+export const POLYGON_HIGHLIGHT_FIRST_ZOOM_WIDTH = 0.18;
+export const POLYGON_HIGHLIGHT_SECOND_ZOOM_WIDTH = 0.1;
+
+export const POLYGON_POINTS_WIDTH = 0.18;
+export const POLYGON_POINTS_FIRST_ZOOM_WIDTH = 0.08;
+export const POLYGON_POINTS_SECOND_ZOOM_WIDTH = 0.04;
