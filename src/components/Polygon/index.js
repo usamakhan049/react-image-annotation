@@ -154,8 +154,8 @@ function Polygon (props) {
         )
       })}
 
-<circle style={{fill:"#00bfa5"}} cx={getCentroid(geometry)[0] + "% "} cy={getCentroid(geometry)[1]+"%"} r="2.8"/>
-    <text x={getCentroid(geometry)[0] + "% "} y={getCentroid(geometry)[1]+"%"} style={{fontSize:"2.3px",fontWeight:"bold"}} text-anchor="middle" fill="white" dy=".3em">
+<circle style={{fill:"#00bfa5"}} cx={getCentroid(geometry)[0] + "% "} cy={getCentroid(geometry)[1]+"%"} r="1.8"/>
+    <text x={getCentroid(geometry)[0] + "% "} y={getCentroid(geometry)[1]+"%"} style={{fontSize:"1.5px",fontWeight:"bold"}} text-anchor="middle" fill="white" dy=".3em">
       {data.id}
     </text>
       
