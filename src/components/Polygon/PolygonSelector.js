@@ -30,66 +30,8 @@ function edgesFromPoints(points) {
   return edges;
 }
 
-function getLastPonitY(geometry){
-  if (!geometry || !geometry.points || geometry.points.length === 0) return null
-    return geometry.points[geometry.points.length-1].y
-
-}
-
-function getLastPonitX(geometry){
-  if (!geometry || !geometry.points || geometry.points.length === 0) return null
-    return geometry.points[geometry.points.length-1].y
-
-}
-
-function Point(x, y) {
-  this.x = x;
-  this.y = y;
-}
-
-function area(geometry) {
-  var area = 0,
-      i,
-      j,
-      point1,
-      point2;
-
-  for (i = 0, j = geometry.points.length - 1; i < geometry.points.length; j=i,i++) {
-      point1 = geometry.points[i];
-      point2 = geometry.points[j];
-      area += point1.x * point2.y;
-      area -= point1.y * point2.x;
-  }
-  area /= 2;
-
-  return area;
-};
-
-function getCentroid(geometry) {
-  var x = 0,
-      y = 0,
-      i,
-      j,
-      f,
-      point1,
-      point2;
-
-  for (i = 0, j = geometry.points.length - 1; i < geometry.points.length; j=i,i++) {
-      point1 = geometry.points[i];
-      point2 = geometry.points[j];
-      f = point1.x * point2.y - point2.x * point1.y;
-      x += (point1.x + point2.x) * f;
-      y += (point1.y + point2.y) * f;
-  }
-
-  f = area(geometry) * 6;
-
-  var a=[x / f ,y / f]
-  return a;
-};
-
-function Polygon (props) {
-  const { geometry,data } = props.annotation
+function PolygonSelector (props) {
+  const { geometry } = props.annotation
   if (!geometry || !geometry.points || geometry.points.length === 0) return null
   var points="";
   return (
@@ -153,20 +95,15 @@ function Polygon (props) {
           props.zoomScale>3.5 && props.zoomScale<=8? POLYGON_POINTS_SECOND_ZOOM_WIDTH+"px":POLYGON_POINTS_WIDTH+"px"} fill="#1976d2" stroke={props.active? "yellow":"white"} />
         )
       })}
-
-<circle style={{fill:"#00bfa5"}} cx={getCentroid(geometry)[0] + "% "} cy={getCentroid(geometry)[1]+"%"} r="2.8"/>
-    <text x={getCentroid(geometry)[0] + "% "} y={getCentroid(geometry)[1]+"%"} style={{fontSize:"2.3px",fontWeight:"bold"}} text-anchor="middle" fill="white" dy=".3em">
-      {data.id}
-    </text>
       
     {/* </div> */}
     </svg>
   )
 }
 
-Polygon.defaultProps = {
+PolygonSelector.defaultProps = {
   className: '',
   style: {}
 }
 
-export default Polygon
+export default PolygonSelector

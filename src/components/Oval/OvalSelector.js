@@ -11,8 +11,8 @@ const Container = styled.div`
   transition: box-shadow 0.21s ease-in-out;
 `
 
-function Oval (props) {
-  const { geometry,data } = props.annotation
+function OvalSelector (props) {
+  const { geometry } = props.annotation
   if (!geometry) return null
 
   return (
@@ -29,42 +29,13 @@ function Oval (props) {
         props.zoomScale>3.5 && props.zoomScale<=8?OVAL_SECOND_ZOOM_WIDTH+"px":OVAL_WIDTH+"px"}`,
         ...props.style
       }}
-    >
-     <div
-        style={{
-          border: "solid 3px #00bfa5",
-          backgroundColor: "#00bfa5",
-          borderRadius: "50%",
-          boxSizing: "border-box",
-          //boxShadow: "0 0 0 1px rgba(0,0,0,0.3)",
-          height: "40px",
-          position: "absolute",
-          transform: "translate3d(-50%, -50%, 0)",
-          width: "40px",
-          left: `${geometry.x + geometry.width / 2 }%`,
-          top: `${geometry.y + geometry.height / 2}%`
-        }}
-      >
-        <p
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            color: "white",
-            fontWeight:"bold",
-            paddingTop:"6px"
-          }}
-        >
-          {data.id}
-        </p>
-      </div>
-    </Container>
+    />
   )
 }
 
-Oval.defaultProps = {
+OvalSelector.defaultProps = {
   className: '',
   style: {}
 }
 
-export default Oval
+export default OvalSelector;

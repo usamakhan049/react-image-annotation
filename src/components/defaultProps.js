@@ -9,6 +9,9 @@ import Oval from './Oval'
 import Polygon from './Polygon'
 import Content from './Content'
 import Overlay from './Overlay'
+import RectangleSelectorView from './Rectangle/RecatangleSelector'
+import OvalSelectorView from './Oval/OvalSelector'
+import PolygonSelectorView from './Polygon/PolygonSelector'
 
 import {
   RectangleSelector,
@@ -40,7 +43,7 @@ export default {
     switch (annotation.geometry.type) {
       case RectangleSelector.TYPE:
         return (
-          <Rectangle
+          <RectangleSelectorView
             annotation={annotation}
             zoomScale={zoomScale}
           />
@@ -54,14 +57,14 @@ export default {
         )
       case OvalSelector.TYPE:
         return (
-          <Oval
+          <OvalSelectorView
             annotation={annotation}
             zoomScale={zoomScale}
           />
         )
       case PolygonSelector.TYPE:
         return (
-          <Polygon
+          <PolygonSelectorView
             annotation={annotation}
             zoomScale={zoomScale}
           />
