@@ -266,15 +266,15 @@ export default compose(
               renderHighlight({
                 key: annotation.comment_polygon.data.id,
                 annotation:annotation.comment_polygon,
-                active: this.shouldAnnotationBeActive(annotation, topAnnotationAtMouse),
+                active: this.shouldAnnotationBeActive(annotation.comment_polygon, topAnnotationAtMouse),
                 zoomScale
               })
               )
           }
           })}
           {props.annotations.map((annotation)=>{
-            showActiveAnnotations(annotation,
-                this.shouldAnnotationBeActive(annotation, topAnnotationAtMouse))
+            showActiveAnnotations(annotation.comment_polygon,
+                this.shouldAnnotationBeActive(annotation.comment_polygon, topAnnotationAtMouse))
             
           })}
           <svg width="100%" height="100%">
@@ -337,7 +337,7 @@ export default compose(
           })
         )}
         {props.annotations.map(annotation => (
-          this.shouldAnnotationBeActive(annotation, topAnnotationAtMouse)
+          this.shouldAnnotationBeActive(annotation.comment_polygon, topAnnotationAtMouse)
           && ( 
             renderContent({
               key: annotation.comment_polygon.data.id,
