@@ -137,11 +137,11 @@ export default compose(
 
     const intersections = annotations
       .map(annotation => {
-        const { geometry } = annotation
+        const { geometry } = annotation.comment_polygon;
         const selector = getSelectorByType(geometry.type)
 
         return selector.intersects({ x, y }, geometry, container)
-          ? annotation
+          ? annotation.comment_polygon
           : false
       })
       .filter(a => !!a)
@@ -259,13 +259,13 @@ export default compose(
         />
         <Items>
           {props.annotations.map(annotation => {
-            if(annotation.geometry.type===PolygonSelector.TYPE){
-           polygonAnnotation.push(annotation)
+            if(annotation.comment_polygon.geometry.type===PolygonSelector.TYPE){
+           polygonAnnotation.push(annotation.comment_polygon)
           }else{
             return(
               renderHighlight({
-                key: annotation.data.id,
-                annotation,
+                key: annotation.comment_polygon.data.id,
+                annotation:annotation.comment_polygon,
                 active: this.shouldAnnotationBeActive(annotation, topAnnotationAtMouse),
                 zoomScale
               })
@@ -273,17 +273,17 @@ export default compose(
           }
           })}
           {props.annotations.map((annotation)=>{
-            showActiveAnnotations(annotation,
-                this.shouldAnnotationBeActive(annotation, topAnnotationAtMouse))
+            showActiveAnnotations(annotation.comment_polygon,
+                this.shouldAnnotationBeActive(annotation.comment_polygon, topAnnotationAtMouse))
             
           })}
           <svg width="100%" height="100%">
           {polygonAnnotation.map(annotation=>{
             return(
               renderHighlight({
-                key: annotation.data.id,
-                annotation,
-                active: this.shouldAnnotationBeActive(annotation, topAnnotationAtMouse),
+                key: annotation.comment_polygon.data.id,
+                annotation:annotation.comment_polygon,
+                active: this.shouldAnnotationBeActive(annotation.comment_polygon, topAnnotationAtMouse),
                 zoomScale
               })
               )
@@ -340,8 +340,8 @@ export default compose(
           this.shouldAnnotationBeActive(annotation, topAnnotationAtMouse)
           && ( 
             renderContent({
-              key: annotation.data.id,
-              annotation: annotation,
+              key: annotation.comment_polygon.data.id,
+              annotation: annotation.comment_polygon,
               imageZoomAmount: props.imageZoomAmount,
               zoomScale
             })
