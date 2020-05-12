@@ -273,8 +273,8 @@ export default compose(
           }
           })}
           {props.annotations.map((annotation)=>{
-            showActiveAnnotations(annotation.comment_polygon,
-                this.shouldAnnotationBeActive(annotation.comment_polygon, topAnnotationAtMouse))
+            showActiveAnnotations(annotation,
+                this.shouldAnnotationBeActive(annotation, topAnnotationAtMouse))
             
           })}
           <svg width="100%" height="100%">
