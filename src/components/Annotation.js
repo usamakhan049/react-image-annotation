@@ -260,7 +260,7 @@ export default compose(
         <Items>
           {props.annotations.map(annotation => {
             if(annotation.comment_polygon.geometry.type===PolygonSelector.TYPE){
-           polygonAnnotation.push(annotation.comment_polygon)
+           polygonAnnotation.push(annotation)
           }else{
             return(
               renderHighlight({
