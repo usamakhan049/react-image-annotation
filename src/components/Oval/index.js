@@ -37,10 +37,10 @@ function Oval (props) {
           borderRadius: "50%",
           boxSizing: "border-box",
           //boxShadow: "0 0 0 1px rgba(0,0,0,0.3)",
-          height: "40px",
+          height: "25px",
           position: "absolute",
           transform: "translate3d(-50%, -50%, 0)",
-          width: "40px",
+          width: "25px",
           left: `${geometry.x + geometry.width / 2 }%`,
           top: `${geometry.y + geometry.height / 2}%`
         }}
@@ -52,7 +52,7 @@ function Oval (props) {
             alignItems: "center",
             color: "white",
             fontWeight:"bold",
-            paddingTop:"6px"
+            //paddingTop:"6px"
           }}
         >
           {data.id}
