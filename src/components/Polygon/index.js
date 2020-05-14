@@ -101,6 +101,7 @@ function Polygon (props) {
     //     ...props.style
     //   }}
     // >
+    <svg width='100%' height='100%'>
     <svg width='100%' height='100%' viewBox="0 0 100 100" preserveAspectRatio="none">
       
       {(geometry.points.length >= 3) && geometry.points.map((item,i) => { // Iterate over points to create the edge lines
@@ -153,13 +154,15 @@ function Polygon (props) {
           props.zoomScale>3.5 && props.zoomScale<=8? POLYGON_POINTS_SECOND_ZOOM_WIDTH+"px":POLYGON_POINTS_WIDTH+"px"} fill="#1976d2" stroke={props.active? "yellow":"white"} />
         )
       })}
-
-<circle style={{fill:"#00bfa5"}} cx={getCentroid(geometry)[0] + "% "} cy={getCentroid(geometry)[1]+"%"} r="1.1"/>
-    <text x={getCentroid(geometry)[0] + "% "} y={getCentroid(geometry)[1]+"%"} style={{fontSize:"1.2px",fontWeight:"bold"}} text-anchor="middle" fill="white" dy=".3em">
-      {data.id}
-    </text>
       
     {/* </div> */}
+    </svg>
+
+    <circle style={{fill:"#00bfa5"}} cx={getCentroid(geometry)[0] + "% "} cy={getCentroid(geometry)[1]+"%"} r="12"/>
+    <text x={getCentroid(geometry)[0] + "% "} y={getCentroid(geometry)[1]+"%"} style={{fontSize:"14px",fontWeight:"bold"}} text-anchor="middle" fill="white" dy=".3em">
+      {data.id}
+    </text>
+
     </svg>
   )
 }
