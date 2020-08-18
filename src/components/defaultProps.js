@@ -12,6 +12,7 @@ import Overlay from './Overlay'
 import RectangleSelectorView from './Rectangle/RecatangleSelector'
 import OvalSelectorView from './Oval/OvalSelector'
 import PolygonSelectorView from './Polygon/PolygonSelector'
+import PointSelectorView from './Point/PointSelector'
 
 import {
   RectangleSelector,
@@ -50,7 +51,7 @@ export default {
         )
       case PointSelector.TYPE:
         return (
-          <Point
+          <PointSelectorView
             annotation={annotation}
             zoomScale={zoomScale}
           />

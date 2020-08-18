@@ -6,8 +6,8 @@ export const OVAL_WIDTH = 2;
 export const OVAL_FIRST_ZOOM_WIDTH = 1;
 export const OVAL_SECOND_ZOOM_WIDTH = 0.7;
 
-export const POINTS_WIDTH = 16;
-export const POINTS_FIRST_ZOOM_WIDTH = 12;
+export const POINTS_WIDTH = 12;
+export const POINTS_FIRST_ZOOM_WIDTH = 10;
 export const POINTS_SECOND_ZOOM_WIDTH = 8;
 
 export const POLYGON_WIDTH = 0.2;

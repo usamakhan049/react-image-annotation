@@ -11,14 +11,29 @@ const Container = styled.div`
     0 0 0 1px rgba(0,0,0,0.3),
     0 0 0 2px rgba(0,0,0,0.2),
     0 5px 4px rgba(0,0,0,0.4);
-  height: 16px;
+
   position: absolute;
   transform: translate3d(-50%, -50%, 0);
-  width: 16px;
+  display: inline-block;
+  &:before {
+    content: "";
+    display: inline-block;
+    vertical-align: middle;
+    padding-top: 100%;
+    height: 0;
+  }
+  text-align: center;
+  line-height: 1;
+  box-sizing: content-box;
+  white-space: nowrap;
+  &:span{
+    display: inline-block;
+  vertical-align: middle;
+  }
 ` 
 
 function Point (props) {
-  const { geometry } = props.annotation
+  const { geometry,data } = props.annotation
   if (!geometry) return null
 
   return (
@@ -26,12 +41,17 @@ function Point (props) {
       style={{
         top: `${geometry.y}%`,
         left: `${geometry.x}%`,
-        height:`${props.zoomScale>=2 && props.zoomScale<=3.5? POINTS_FIRST_ZOOM_WIDTH+"px":
+        minHeight:`${props.zoomScale>=2 && props.zoomScale<=3.5? POINTS_FIRST_ZOOM_WIDTH+"px":
         props.zoomScale>3.5 && props.zoomScale<=8? POINTS_SECOND_ZOOM_WIDTH+"px":POINTS_WIDTH+"px"}`,
-        width:`${props.zoomScale>=2 && props.zoomScale<=3.5? POINTS_FIRST_ZOOM_WIDTH+"px":
-        props.zoomScale>3.5 && props.zoomScale<=8? POINTS_SECOND_ZOOM_WIDTH+"px":POINTS_WIDTH+"px"}`
+        minWidth:`${props.zoomScale>=2 && props.zoomScale<=3.5? POINTS_FIRST_ZOOM_WIDTH+"px":
+        props.zoomScale>3.5 && props.zoomScale<=8? POINTS_SECOND_ZOOM_WIDTH+"px":POINTS_WIDTH+"px"}`,
+        color: "white",
+        fontWeight:"bold",
+        fontSize:"11px",
       }}
-    />
+    >
+      <span>{data.id}</span>
+    </Container>
   )
 }
 
